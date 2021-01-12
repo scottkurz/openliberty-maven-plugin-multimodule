@@ -14,7 +14,7 @@ My company has over 100 web modules, so to adminster 100 copies of the plugin co
 ## Steps to reproduce
 
 ```
-1. check out the parnet project
+1. check out the parent project
 2. run mvn install in the parent project to get your parent installed into the local maven repo
 3. goto web module, execute mvn -Pliberty This will install it all, but will ignore the execution from parent and only execute 'web-child-module-frontend-additional-dependencies'
    look for the message :
