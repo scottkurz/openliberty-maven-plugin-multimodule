@@ -65,7 +65,7 @@
                         </configuration>
                         <executions>
 								<execution>
-		                        <id>deploy-additional-dependencies</id>
+		                        <id>deploy-default-parent-dependencies</id>
  		                        <phase>pre-integration-test</phase>
 		                        <goals>
 		                            <goal>deploy</goal>

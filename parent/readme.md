@@ -25,7 +25,7 @@ My company has over 100 web modules, so to adminster 100 copies of the plugin co
    [INFO] --- liberty-maven-plugin:3.3.3:deploy (web-child-module-frontend-additional-dependencies) @ web-module ---
    ..
    ..
-   [INFO] --- liberty-maven-plugin:3.3.3:deploy (deploy-additional-dependencies) @ web-module ---
+   [INFO] --- liberty-maven-plugin:3.3.3:deploy (deploy-default-parent-dependencies) @ web-module ---
    
      
 ```
