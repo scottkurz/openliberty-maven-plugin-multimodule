@@ -4,7 +4,7 @@ This project will show a web  moduel with a parent project, containing the openl
 
 As a child of parent, a web module also contain a profile with same name as parent, but with some additional execution
 
-The oint of this is to be able to have one parent to rule the maven plugin into all downstreams web projects.
+The point of this is to be able to have one parent to rule the maven plugin into all downstreams web projects.
 
 The parent is holding the most important plugin configs, but if the web module need some additional executions, it will add it. else it will inherit all from parent.
 
