@@ -1,14 +1,14 @@
 # this project is a demo of issue [https://github.com/OpenLiberty/ci.maven/issues/1078](https://github.com/OpenLiberty/ci.maven/issues/1078)
 
-This project will show a web  moduel with a parent project, containing the openliberty maven plugin as a profile.
+This project will show a web  module with a parent project, containing the openliberty maven plugin as a profile.
 
 As a child of parent, a web module also contain a profile with same name as parent, but with some additional execution
 
 The point of this is to be able to have one parent to rule the maven plugin into all downstreams web projects.
 
-The parent is holding the most important plugin configs, but if the web module need some additional executions, it will add it. else it will inherit all from parent.
+The parent is holding the most important plugin configs, but if the web module need some additional executions, it will add it. Else it will inherit all from parent.
 
-My comany has ovr 100 web modles, so to adminster 100 copies of the plugin config, would be a nigthmare
+My company has over 100 web modules, so to adminster 100 copies of the plugin config, would be a nigthmare
 
 
 ## Steps to reproduce
