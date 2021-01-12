@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>child web</name>
+    <artifactId>web-module</artifactId>
+    <packaging>war</packaging>
+    <parent>
+        <groupId>no.bwa</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    
+    
+    <properties>
+    	<jdkVersion>8</jdkVersion>
+    	<source>8</source>
+    </properties>
+    <dependencies>
+        
+        
+    </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.0.2</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+  
+ </build>
+    
+    <profiles>
+      <profile>
+            <id>liberty</id>
+            
+            <!-- 
+            this is a 'extention' to the pluging form parent
+            	 
+            -->
+            <build>
+		<pluginManagement>
+                    <plugins>
+	                    <plugin>
+	                        <groupId>io.openliberty.tools</groupId>
+	                        <artifactId>liberty-maven-plugin</artifactId>
+	                        <executions>
+								<execution>
+		                        <id>web-child-module-frontend-additional-dependencies</id>
+ 		                        <phase>pre-integration-test</phase>
+		                        <goals>
+		                            <goal>deploy</goal>
+		                        </goals>
+		                        <configuration>
+									<copyDependencies>
+			                            <stripVersion>true</stripVersion>
+			                            
+			                            <!-- Legger med siste versjon av div essensielle biblioteker -->
+			                            
+										<!-- meaning : target\liberty\wlp\usr\servers\defaultServer\lib\ -->				                            
+										<location>lib</location>
+										
+										<dependency>
+										  <groupId>com.vaclavdedik</groupId>
+										  <artifactId>whatever</artifactId>
+										  <version>1.0.0</version>
+										</dependency>                       
+			                         </copyDependencies>
+									</configuration>
+									</execution>
+	 							</executions>
+	                     </plugin>
+		            </plugins>
+    			</pluginManagement>
+            </build>
+		</profile>
+	</profiles>    
+</project>

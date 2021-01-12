@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>parent</name>
+    <groupId>no.bwa</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+
+    <profiles>
+       <profile>
+            <id>liberty</id>
+            <build>
+                <defaultGoal>liberty:dev</defaultGoal>
+			<pluginManagement>
+                    <plugins>
+						<plugin>
+						<!-- 
+							S�rger for at src/dev/resources blir kopiert ut til liberty serverens dev_classpath, og 
+							at src/main/resources blir kopiert til /target/classes 
+						-->
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-resources-plugin</artifactId>
+                            <configuration>
+ 				              <resources>          
+				                <resource>
+				                  <directory>${project.basedir}/src/dev/resources</directory>
+				                  <filtering>false</filtering>
+				                  <targetPath>${project.basedir}/target/liberty/wlp/usr/servers/defaultServer/dev_classpath</targetPath>
+				                </resource>
+				                <resource>
+				                  <directory>${project.basedir}/src/dev/resources</directory>
+				                  <filtering>false</filtering>
+				                  <targetPath>${project.basedir}/target/liberty/wlp/usr/shared/config/dev_classpath</targetPath>
+				                </resource>
+				              </resources>              
+				            </configuration>            
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+                <plugins>
+		        	
+                    <plugin>
+                        <groupId>io.openliberty.tools</groupId>
+                        <artifactId>liberty-maven-plugin</artifactId>
+                        <version>3.3.3</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <looseApplication>true</looseApplication>
+                            <deployPackages>all</deployPackages>
+                            <stripVersion>true</stripVersion>
+                            <runtimeArtifact>
+                                <!-- Version not specified, always getting the latest -->
+                                <groupId>com.ibm.websphere.appserver.runtime</groupId>
+                                <artifactId>wlp-kernel</artifactId>
+                                <type>zip</type>
+                            </runtimeArtifact>
+                            
+                            <!-- settings to speed up the server startup  -->
+                            <serverStartTimeout>180</serverStartTimeout>
+                            <skipITs>true</skipITs>
+                            <skipTests>true</skipTests>
+                            <skipUTs>true</skipUTs>
+                            <hotTests>false</hotTests>
+                        </configuration>
+                        <executions>
+								<execution>
+		                        <id>deploy-additional-dependencies</id>
+ 		                        <phase>pre-integration-test</phase>
+		                        <goals>
+		                            <goal>deploy</goal>
+		                        </goals>
+		                        <configuration>
+									<copyDependencies>
+			                            <stripVersion>true</stripVersion>
+			                            
+			                            <!-- Legger med siste versjon av div essensielle biblioteker -->
+			                            
+										<!-- meaning : target\liberty\wlp\usr\servers\defaultServer\lib\ -->				                            
+										<location>lib</location>  
+		                                
+		                                <dependency>
+											<groupId>com.oracle.database.jdbc</groupId>
+											<artifactId>ojdbc6</artifactId>
+											<version>11.2.0.4</version>
+		                                </dependency>
+	 	                            </copyDependencies>						
+		                        </configuration>
+		                    </execution>                        
+                        </executions>
+                    </plugin>
+                 </plugins>
+            </build>
+        </profile>
+        
+    </profiles>
+
+</project>

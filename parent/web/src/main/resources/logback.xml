@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true"> <!-- default scan er hvert minutt -->
+    <property name="LOG_CONTEXT" value="brevsystem-frontend"/>
+    <include file="${LOGBACK_HOME:-d:/etc/logback}/master-logback.xml" />
+    <include file="${LOGBACK_HOME:-d:/etc/logback}/brevsystem-frontend-logback.xml"/>
+</configuration>
